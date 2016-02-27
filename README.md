@@ -1,2 +1,2 @@
 # tinkertanks
-Tanks for the memories
+HTML canvas tank game, by Liam
