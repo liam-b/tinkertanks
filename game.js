@@ -10,7 +10,7 @@ var myFirebaseRef = new Firebase( "https://blinding-fire-4702.firebaseio.com/" )
 var moveX = 0;
 var moveY = 0;
 
-// Move to external file?
+// Move to firebase
 
 var player = {
   state : 1,
