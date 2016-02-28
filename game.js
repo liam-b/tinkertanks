@@ -6,10 +6,7 @@ var myFirebaseRef = new Firebase( "https://blinding-fire-4702.firebaseio.com/" )
 var moveX = 0;
 var moveY = 0;
 
-var key = {
-  w : false,
-  S : false
-};
+//Move to external file?
 
 var player = {
   state : 1,
@@ -34,15 +31,6 @@ var player = {
     trueRotation : 0,
     range : 10,
     color : "#5989D0",
-  },
-  collisions : {
-    type : RECTANGLE,
-    x : [
-      10, -10
-    ],
-    y : [
-      10, -10
-    ]
   }
 };
 
@@ -61,8 +49,6 @@ function draw () {
   gunUpdate();
 
   wallCollisions();
-
-  console.log( mouse.x, mouse.y );
 
   requestAnimationFrame( draw );
 
