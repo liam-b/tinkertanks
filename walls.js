@@ -17,4 +17,22 @@ var walls = [
     color : "#787878",
     type : RECTANGLE
   },
+  {
+    x : 90,
+    y : -150,
+    rotation : 0,
+    width : 200,
+    height : 20,
+    color : "#787878",
+    type : RECTANGLE
+  },
+  {
+    x : -110,
+    y : -150,
+    rotation : 0,
+    width : 200,
+    height : 20,
+    color : "#787878",
+    type : RECTANGLE
+  },
 ]

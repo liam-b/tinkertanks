@@ -20,7 +20,7 @@ var player = {
   width : 65,
   height : 50,
   color : "#6C97D6",
-  speed : 3,
+  speed : 2,
   turnSpeed : 2,
   gun : {
     x : 0,
@@ -48,11 +48,11 @@ function draw () {
 
   drawPlayer();
 
+  wallCollisions();
+
   keyUpdate();
 
   gunUpdate();
-
-  wallCollisions();
 
   requestAnimationFrame( draw );
 
@@ -62,12 +62,18 @@ draw();
 
 function wallCollisions () {
   for ( i = 0; i < walls.length; i++ ) {
-    //if ( rangeIf ( player.collisions.x, wall[i].collisions.x ) )
+    if ( checkCollision( player, walls[i] ) ) {
+    }
   }
 }
 
-function rangeIf ( range1, range2 ) {
-  //if ( range1[1] >  )
+function checkCollision ( source, target ) {
+  if ( !( source.x + source.width < target.x || target.x < source.x - source.height ) && !( source.y + source.height < target.y || target.y < source.y - source.height ) ) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
 }
 
 function drawPlayer () {
