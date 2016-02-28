@@ -1,3 +1,7 @@
+// Online tank game
+// Trello : https://trello.com/b/EJNPx75o/tinker-tanks
+// Git : https://github.com/liam-b/tinkertanks
+
 var canvas = document.getElementById( "myCanvas" );
 var ctx = canvas.getContext( "2d" );
 
@@ -6,7 +10,7 @@ var myFirebaseRef = new Firebase( "https://blinding-fire-4702.firebaseio.com/" )
 var moveX = 0;
 var moveY = 0;
 
-//Move to external file?
+// Move to external file?
 
 var player = {
   state : 1,
