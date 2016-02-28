@@ -1,12 +1,3 @@
-RECTANGLE = 0;
-CIRCLE = 1;
-
-UP = false;
-DOWN = true;
-
-WALLS = 10;
-
-
 var canvas = document.getElementById( "myCanvas" );
 var ctx = canvas.getContext( "2d" );
 
@@ -15,18 +6,9 @@ var myFirebaseRef = new Firebase( "https://blinding-fire-4702.firebaseio.com/" )
 var moveX = 0;
 var moveY = 0;
 
-document.addEventListener( "keydown", keyDownHandler, false );
-document.addEventListener( "keyup", keyUpHandler, false );
-document.addEventListener( "mousemove", mouseMoveHandler, false );
-
 var key = {
   w : false,
   S : false
-};
-
-var mouse = {
-  x : 0,
-  y : 0
 };
 
 var player = {
@@ -37,7 +19,7 @@ var player = {
   width : 65,
   height : 50,
   color : "#6C97D6",
-  speed : 4,
+  speed : 3,
   turnSpeed : 2,
   gun : {
     x : 0,
@@ -48,7 +30,7 @@ var player = {
     height : 10,
     circleRadius : 18,
     rotation : 0,
-    rotationSpeed : 3,
+    rotationSpeed : 2,
     trueRotation : 0,
     range : 10,
     color : "#5989D0",
@@ -66,11 +48,6 @@ var player = {
 
 console.log( player );
 
-var walls = [
-  { x : 0, y : 0, rotation : 0, width : 20, height : 100, color : "#787878", collisions : { type : RECTANGLE, x : [ 10, -10 ], y : [ 10, -10 ] } },
-  { x : 100, y : -200, rotation : 0, width : 20, height : 100, color : "#787878", collisions : { type : RECTANGLE, x : [ 10, -10 ], y : [ 10, -10 ] } }
-];
-
 function draw () {
 
   clearCanvas();
@@ -85,7 +62,7 @@ function draw () {
 
   wallCollisions();
 
-  console.log( player.gun.trueRotation );
+  console.log( mouse.x, mouse.y );
 
   requestAnimationFrame( draw );
 
@@ -121,7 +98,6 @@ function gunUpdate () {
 }
 
 function translate () {
-
   player.x += moveX;
   player.y += moveY;
 
@@ -131,7 +107,6 @@ function translate () {
 }
 
 function updateGunRotation () {
-
   if ( player.gun.rotation - player.gun.trueRotation + 180 < -player.gun.rotationSpeed || player.gun.rotation - player.gun.trueRotation + 180 > player.gun.rotationSpeed ) {
 
     if ( player.gun.rotation - player.gun.trueRotation > 0 || player.gun.rotation - player.gun.trueRotation < -180 && !( player.gun.rotation - player.gun.trueRotation < -360 ) ) {
@@ -156,12 +131,11 @@ function clearCanvas () {
 }
 
 function keyMovement () {
-
-  if ( key.w == DOWN ) {
+  if ( key[87] == DOWN ) {
     moveY = Math.sin( player.rotation * Math.PI / 180 );
     moveX = Math.cos( player.rotation * Math.PI / 180 );
   }
-  else if ( key.s == DOWN ) {
+  else if ( key[83] == DOWN ) {
     moveY = -Math.sin( player.rotation * Math.PI / 180 );
     moveX = -Math.cos( player.rotation * Math.PI / 180 );
   }
@@ -175,61 +149,18 @@ function keyMovement () {
 }
 
 function keyUpdate () {
-
   keyMovement();
   keyRotation();
 }
 
 function keyRotation () {
 
-  if ( key.a == DOWN ) {
+  if ( key[65] == DOWN ) {
     player.rotation = ( player.rotation - player.turnSpeed + 360 ) % 360;
   }
-  else if ( key.d == DOWN ) {
+  else if ( key[68] == DOWN ) {
     player.rotation = ( player.rotation + player.turnSpeed + 360 ) % 360;
   }
-}
-
-function keyDownHandler ( e ) {
-
-  switch (e.keyCode) {
-    case 87:
-      key.w = true;
-      break;
-    case 83:
-      key.s = true;
-      break;
-    case 65:
-      key.a = true;
-      break;
-    case 68:
-      key.d = true;
-      break;
-    }
-}
-
-function keyUpHandler ( e ) {
-
-  switch (e.keyCode) {
-    case 87:
-      key.w = false;
-      break;
-    case 83:
-      key.s = false;
-      break;
-    case 65:
-      key.a = false;
-      break;
-    case 68:
-      key.d = false;
-      break;
-    }
-}
-
-function mouseMoveHandler ( e ) {
-
-  mouse.x = e.clientX - canvas.offsetLeft - canvas.width / 2;
-  mouse.y = e.clientY - canvas.offsetTop - canvas.height / 2;
 }
 
 function drawObject ( type, x, y, rotation, rotationX, rotationY, width, height, color, comment ) {
